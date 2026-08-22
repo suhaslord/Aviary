@@ -1,0 +1,60 @@
+name: Build runtime option dependency trace
+
+on:
+  push:
+    branches:
+      - refactor/runtime-option-dependency-tracing
+
+permissions:
+  contents: write
+
+jobs:
+  trace-two-dof:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout actions
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/actions
+          path: actions
+
+      - name: Prepare Aviary test environment
+        uses: ./actions/.github/actions/prepare_environment
+        with:
+          NAME: runtime-trace
+          OPENMDAO_PIXI_ENVIRONMENT: py311
+          OPENMDAO_INSTALL_FROM: pypi
+          OPENMDAO: '3.45.0'
+          SNOPT: ''
+          DYMOS: '1.13.1'
+          PYOPTSPARSE: ''
+          PY: ''
+          NUMPY: ''
+          SCIPY: ''
+          SSH_PRIVATE_KEY: ''
+          SSH_KNOWN_HOSTS: ''
+          SNOPT_LOCATION_77: ''
+
+      - name: Trace two-DOF option reads
+        shell: bash -l {0}
+        run: |
+          eval "$(pixi shell-hook -e py311 --manifest-path=${PIXI_MANIFEST})"
+          python tools/trace_option_defaults.py \
+            --discover aviary/mission/two_dof/ode/test \
+            --pattern 'test_*ode.py' \
+            --output aviary/variable_info/migrations/runtime_option_trace_two_dof.json \
+            --verbosity 1
+
+      - name: Commit trace evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add aviary/variable_info/migrations/runtime_option_trace_two_dof.json
+          if git diff --cached --quiet; then
+            echo "Trace already current"
+          else
+            git commit -m "test: capture two-DOF runtime option dependencies"
+            git push origin HEAD:refactor/runtime-option-dependency-tracing
+          fi
