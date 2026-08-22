@@ -1,0 +1,60 @@
+name: Apply two-DOF explicit option contract phase 1
+
+on:
+  push:
+    branches:
+      - refactor/two-dof-explicit-options-phase1
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: refactor/two-dof-explicit-options-phase1
+
+      - name: Replace the traced one-key contract
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('aviary/mission/two_dof/ode/test/test_flight_ode.py')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              'from aviary.subsystems.propulsion.utils import build_engine_deck\n',
+              'from aviary.subsystems.propulsion.utils import build_engine_deck\n'
+              'from aviary.utils.aviary_values import AviaryValues\n',
+              1,
+          )
+          text = text.replace(
+              'from aviary.variable_info.variables import Aircraft, Dynamic\n',
+              'from aviary.variable_info.variables import Aircraft, Dynamic, Settings\n',
+              1,
+          )
+          old = '            aviary_options=get_option_defaults(),\n'
+          new = (
+              '            aviary_options=AviaryValues(\n'
+              "                {Settings.VERBOSITY: (Verbosity.BRIEF, 'unitless')}\n"
+              '            ),\n'
+          )
+          if text.count(old) != 1:
+              raise SystemExit(f'expected exactly one inline get_option_defaults call, found {text.count(old)}')
+          text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+          python tools/audit_option_defaults.py --write-manifest --check
+          git diff --check
+
+      - name: Commit migration slice
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            aviary/mission/two_dof/ode/test/test_flight_ode.py \
+            aviary/variable_info/migrations/option_defaults_inventory.json
+          git commit -m "test: make descent FlightODE options explicit"
+          git push origin HEAD:refactor/two-dof-explicit-options-phase1
