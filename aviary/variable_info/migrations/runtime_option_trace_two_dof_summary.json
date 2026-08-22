@@ -1,0 +1,333 @@
+{
+  "issue": "OpenMDAO/Aviary#1251",
+  "trace_source": "generated runtime trace; raw trace need not be committed",
+  "tests": {
+    "run": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "successful": true
+  },
+  "summary": {
+    "runtime_instances": 17,
+    "runtime_callsites": 13,
+    "unique_value_reads": 117,
+    "unique_explicit_writes": 6,
+    "category_counts": {
+      "builder-heavy": 12,
+      "small-contract": 1
+    },
+    "migration_candidate_count": 1,
+    "builder_heavy_count": 12
+  },
+  "ranked_callsites_easiest_first": [
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:153:setUp",
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:149:setUp",
+    "aviary/mission/two_dof/ode/test/test_accel_ode.py:25:setUp",
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:86:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_path_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:85:setUp",
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:22:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:28:setUp",
+    "aviary/mission/two_dof/ode/test/test_simple_cruise_ode.py:22:setUp",
+    "aviary/mission/two_dof/ode/test/test_taxi_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:145:setUp",
+    "aviary/mission/two_dof/ode/test/test_landing_ode.py:26:setUp"
+  ],
+  "migration_candidates": [
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:153:setUp"
+  ],
+  "builder_heavy_or_opaque": [
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:149:setUp",
+    "aviary/mission/two_dof/ode/test/test_accel_ode.py:25:setUp",
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:86:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_path_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:85:setUp",
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:22:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:28:setUp",
+    "aviary/mission/two_dof/ode/test/test_simple_cruise_ode.py:22:setUp",
+    "aviary/mission/two_dof/ode/test/test_taxi_ode.py:26:setUp",
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:145:setUp",
+    "aviary/mission/two_dof/ode/test/test_landing_ode.py:26:setUp"
+  ],
+  "most_common_runtime_reads": [
+    {
+      "key": "settings:verbosity",
+      "callsite_count": 13
+    },
+    {
+      "key": "aircraft:engine:constant_fuel_mass_consumption",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:pylon_factor",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:reference_mass",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:supersonic_fuel_flow_scaler",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:global_hybrid_throttle",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:scale_factor",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:additional_mass_fraction",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:num_fuselage_engines",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:fuel_flow_scaler_constant_term",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:rpm_design",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:mass_scaler",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:interpolation_method",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:num_engines",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:scale_mass",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:generate_flight_idle",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:interpolation_sort",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:thrust_reversers_mass_scaler",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:type",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:ignore_negative_thrust",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:scaled_sls_thrust",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:pod_mass_scaler",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:mass_specific",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:reference_sls_thrust",
+      "callsite_count": 12
+    },
+    {
+      "key": "aircraft:engine:wing_locations",
+      "callsite_count": 12
+    }
+  ],
+  "callsites": {
+    "aviary/mission/two_dof/ode/test/test_accel_ode.py:25:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 40,
+      "explicit_write_count": 1,
+      "inherited_read_count": 39,
+      "membership_check_count": 0,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:22:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 1,
+      "inherited_read_count": 116,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py:86:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 2,
+      "inherited_read_count": 115,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.DATA_FILE",
+        "Aircraft.Engine.GLOBAL_THROTTLE"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:145:setUp": {
+      "category": "builder-heavy",
+      "instances": 2,
+      "read_count": 117,
+      "explicit_write_count": 0,
+      "inherited_read_count": 117,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:153:setUp": {
+      "category": "small-contract",
+      "instances": 2,
+      "read_count": 1,
+      "explicit_write_count": 0,
+      "inherited_read_count": 1,
+      "membership_check_count": 0,
+      "bulk_access": [],
+      "static_explicit_set_keys": [],
+      "static_receiver": null,
+      "required_runtime_reads": [
+        "settings:verbosity"
+      ],
+      "runtime_explicit_writes": []
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py:28:setUp": {
+      "category": "builder-heavy",
+      "instances": 2,
+      "read_count": 117,
+      "explicit_write_count": 2,
+      "inherited_read_count": 116,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "'verbosity'",
+        "Aircraft.Engine.GLOBAL_THROTTLE"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_path_ode.py:26:setUp": {
+      "category": "builder-heavy",
+      "instances": 2,
+      "read_count": 117,
+      "explicit_write_count": 2,
+      "inherited_read_count": 115,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE",
+        "Mission.GRAVITY"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_landing_ode.py:26:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 0,
+      "inherited_read_count": 117,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [],
+      "static_receiver": "options"
+    },
+    "aviary/mission/two_dof/ode/test/test_simple_cruise_ode.py:22:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 1,
+      "inherited_read_count": 116,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:149:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 40,
+      "explicit_write_count": 3,
+      "inherited_read_count": 38,
+      "membership_check_count": 0,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE",
+        "Aircraft.Engine.NUM_ENGINES",
+        "Mission.GRAVITY"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:26:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 2,
+      "inherited_read_count": 115,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE",
+        "Mission.GRAVITY"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py:85:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 2,
+      "inherited_read_count": 115,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Aircraft.Engine.GLOBAL_THROTTLE",
+        "Mission.GRAVITY"
+      ],
+      "static_receiver": "aviary_options"
+    },
+    "aviary/mission/two_dof/ode/test/test_taxi_ode.py:26:setUp": {
+      "category": "builder-heavy",
+      "instances": 1,
+      "read_count": 117,
+      "explicit_write_count": 1,
+      "inherited_read_count": 116,
+      "membership_check_count": 637,
+      "bulk_access": [],
+      "static_explicit_set_keys": [
+        "Mission.Taxi.DURATION"
+      ],
+      "static_receiver": "options"
+    }
+  }
+}
