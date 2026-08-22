@@ -1,0 +1,34 @@
+name: Build option-default migration inventory
+
+on:
+  push:
+    branches:
+      - refactor/option-dependency-inventory
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refactor/option-dependency-inventory
+      - name: Generate AST inventory
+        run: |
+          python tools/audit_option_defaults.py --write-manifest
+          python tools/audit_option_defaults.py --check
+          git diff --check
+      - name: Commit inventory
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add aviary/variable_info/migrations/option_defaults_inventory.json
+          if git diff --cached --quiet; then
+            echo "Inventory already current"
+          else
+            git commit -m "test: baseline hidden option-default dependencies"
+            git push origin HEAD:refactor/option-dependency-inventory
+          fi
