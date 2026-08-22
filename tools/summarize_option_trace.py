@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,7 +59,7 @@ def summarize(trace, static_report):
         key_frequency.update(reads)
 
         static = static_by_site.get(site, {})
-        callsites[site] = {
+        entry = {
             'category': category,
             'instances': runtime.get('instances', 0),
             'read_count': len(reads),
@@ -67,12 +67,13 @@ def summarize(trace, static_report):
             'inherited_read_count': len(inherited_reads),
             'membership_check_count': len(membership),
             'bulk_access': bulk,
-            'runtime_reads': sorted(reads),
-            'runtime_explicit_writes': sorted(writes),
-            'runtime_inherited_reads': sorted(inherited_reads),
             'static_explicit_set_keys': static.get('explicit_set_keys', []),
             'static_receiver': static.get('receiver'),
         }
+        if category in {'small-contract', 'medium-contract'}:
+            entry['required_runtime_reads'] = sorted(inherited_reads)
+            entry['runtime_explicit_writes'] = sorted(writes)
+        callsites[site] = entry
 
     ranked = sorted(
         callsites,
@@ -97,7 +98,7 @@ def summarize(trace, static_report):
 
     return {
         'issue': 'OpenMDAO/Aviary#1251',
-        'trace_source': 'runtime_option_trace_two_dof.json',
+        'trace_source': 'generated runtime trace; raw trace need not be committed',
         'tests': trace.get('tests', {}),
         'summary': {
             'runtime_instances': trace.get('get_option_defaults_instances', 0),
@@ -113,7 +114,7 @@ def summarize(trace, static_report):
         'builder_heavy_or_opaque': builder_heavy,
         'most_common_runtime_reads': [
             {'key': key, 'callsite_count': count}
-            for key, count in key_frequency.most_common()
+            for key, count in key_frequency.most_common(25)
         ],
         'callsites': callsites,
     }
