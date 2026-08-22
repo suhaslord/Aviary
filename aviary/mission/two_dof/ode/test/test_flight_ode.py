@@ -10,12 +10,13 @@ from packaging import version
 from aviary.mission.two_dof.ode.flight_ode import FlightODE
 from aviary.mission.two_dof.ode.test.params import set_params_for_unit_tests
 from aviary.subsystems.propulsion.utils import build_engine_deck
+from aviary.utils.aviary_values import AviaryValues
 from aviary.utils.test_utils.default_subsystems import get_default_mission_subsystems
 from aviary.utils.test_utils.IO_test_util import check_prob_outputs
 from aviary.variable_info.enums import SpeedType, Verbosity
 from aviary.variable_info.functions import setup_model_options
 from aviary.variable_info.options import get_option_defaults
-from aviary.variable_info.variables import Aircraft, Dynamic
+from aviary.variable_info.variables import Aircraft, Dynamic, Settings
 
 
 @use_tempdirs
@@ -150,7 +151,9 @@ class FlightODEDescenTestCase(unittest.TestCase):
         self.sys = self.prob.model = FlightODE(
             num_nodes=1,
             mach_target=0.8,
-            aviary_options=get_option_defaults(),
+            aviary_options=AviaryValues(
+                {Settings.VERBOSITY: (Verbosity.BRIEF, 'unitless')}
+            ),
             subsystems=default_mission_subsystems,
         )
 
