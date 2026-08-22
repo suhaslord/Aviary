@@ -194,12 +194,8 @@ class FoldAndStrutTestCase1(unittest.TestCase):
     def test_case1(self):
         self.prob.run_model()
         tol = 1e-4
-        assert_near_equal(
-            self.prob[Aircraft.Wing.FOLDED_SPAN_DIMENSIONLESS], 0.65556, tol
-        )
-        assert_near_equal(
-            self.prob[Aircraft.Strut.ATTACHMENT_LOCATION], 90.0, tol
-        )
+        assert_near_equal(self.prob[Aircraft.Wing.FOLDED_SPAN_DIMENSIONLESS], 0.65556, tol)
+        assert_near_equal(self.prob[Aircraft.Strut.ATTACHMENT_LOCATION], 90.0, tol)
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
@@ -228,9 +224,7 @@ class FoldAndStrutTestCase2(unittest.TestCase):
         self.prob.model.set_input_defaults(
             Aircraft.Wing.FOLDED_SPAN_DIMENSIONLESS, val=0.8, units='unitless'
         )
-        self.prob.model.set_input_defaults(
-            Aircraft.Strut.ATTACHMENT_LOCATION, val=90.0, units='ft'
-        )
+        self.prob.model.set_input_defaults(Aircraft.Strut.ATTACHMENT_LOCATION, val=90.0, units='ft')
 
         setup_model_options(self.prob, options)
 
@@ -240,9 +234,7 @@ class FoldAndStrutTestCase2(unittest.TestCase):
         self.prob.run_model()
         tol = 1e-4
         assert_near_equal(self.prob[Aircraft.Wing.FOLDED_SPAN], 120.0, tol)
-        assert_near_equal(
-            self.prob[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS], 0.6, tol
-        )
+        assert_near_equal(self.prob[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS], 0.6, tol)
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
@@ -280,12 +272,8 @@ class FoldAndStrutTestCase3(unittest.TestCase):
     def test_case1(self):
         self.prob.run_model()
         tol = 1e-4
-        assert_near_equal(
-            self.prob[Aircraft.Wing.FOLDED_SPAN_DIMENSIONLESS], 0.65556, tol
-        )
-        assert_near_equal(
-            self.prob[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS], 0.6, tol
-        )
+        assert_near_equal(self.prob[Aircraft.Wing.FOLDED_SPAN_DIMENSIONLESS], 0.65556, tol)
+        assert_near_equal(self.prob[Aircraft.Strut.ATTACHMENT_LOCATION_DIMENSIONLESS], 0.6, tol)
 
         partial_data = self.prob.check_partials(out_stream=None, method='cs')
         assert_check_partials(partial_data, atol=1e-8, rtol=1e-8)
