@@ -1,0 +1,1074 @@
+{
+  "issue": "OpenMDAO/Aviary#1251",
+  "purpose": "Track and eliminate hidden get_option_defaults dependencies without regressions.",
+  "summary": {
+    "call_count": 86,
+    "file_count": 25,
+    "explicit_override_key_count": 230,
+    "domain_counts": {
+      "mission/energy_state": 2,
+      "mission/solved_two_dof": 3,
+      "mission/two_dof": 13,
+      "subsystems/aerodynamics": 17,
+      "subsystems/geometry": 41,
+      "subsystems/mass": 1,
+      "subsystems/propulsion": 8,
+      "utils": 1
+    }
+  },
+  "files": {
+    "aviary/mission/energy_state/phases/test/test_building_landing.py": {
+      "domain": "mission/energy_state",
+      "calls": [
+        {
+          "line": 30,
+          "receiver": "options",
+          "scope": "test_case1",
+          "explicit_set_keys": [
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/energy_state/phases/test/test_building_takeoff.py": {
+      "domain": "mission/energy_state",
+      "calls": [
+        {
+          "line": 33,
+          "receiver": "options",
+          "scope": "test_case1",
+          "explicit_set_keys": [
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/solved_two_dof/ode/test/test_groundroll_ode.py": {
+      "domain": "mission/solved_two_dof",
+      "calls": [
+        {
+          "line": 24,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE",
+            "Mission.GRAVITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 33,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 2
+    },
+    "aviary/mission/solved_two_dof/ode/test/test_unsteady_solved_ode.py": {
+      "domain": "mission/solved_two_dof",
+      "calls": [
+        {
+          "line": 30,
+          "receiver": "aviary_options",
+          "scope": "_test_unsteady_solved_ode",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/two_dof/ode/test/test_accel_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 25,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/two_dof/ode/test/test_breguet_cruise_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 22,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 86,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.DATA_FILE",
+            "Aircraft.Engine.GLOBAL_THROTTLE"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 2
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 28,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "'verbosity'",
+            "Aircraft.Engine.GLOBAL_THROTTLE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 145,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 153,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 3
+    },
+    "aviary/mission/two_dof/ode/test/test_flight_path_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 26,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE",
+            "Mission.GRAVITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/two_dof/ode/test/test_landing_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 26,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/two_dof/ode/test/test_simple_cruise_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 22,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/mission/two_dof/ode/test/test_takeoff_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 26,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE",
+            "Mission.GRAVITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 85,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE",
+            "Mission.GRAVITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 149,
+          "receiver": "aviary_options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GLOBAL_THROTTLE",
+            "Aircraft.Engine.NUM_ENGINES",
+            "Mission.GRAVITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 3
+    },
+    "aviary/mission/two_dof/ode/test/test_taxi_ode.py": {
+      "domain": "mission/two_dof",
+      "calls": [
+        {
+          "line": 26,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Mission.Taxi.DURATION"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/subsystems/aerodynamics/gasp_based/flaps_model/test/test_flaps_group.py": {
+      "domain": "subsystems/aerodynamics",
+      "calls": [
+        {
+          "line": 24,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 125,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 226,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 328,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 429,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 530,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FLAP_TYPE"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 6
+    },
+    "aviary/subsystems/aerodynamics/gasp_based/test/test_gaspaero.py": {
+      "domain": "subsystems/aerodynamics",
+      "calls": [
+        {
+          "line": 299,
+          "receiver": "options",
+          "scope": "test_case1",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE",
+            "Aircraft.Engine.NUM_ENGINES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 339,
+          "receiver": "options",
+          "scope": "test_case2",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE",
+            "Aircraft.Engine.NUM_ENGINES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 502,
+          "receiver": "options",
+          "scope": "test_case2",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 532,
+          "receiver": "options",
+          "scope": "test_case3",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 651,
+          "receiver": "options",
+          "scope": "test_case1",
+          "explicit_set_keys": [
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 728,
+          "receiver": "options",
+          "scope": "test_case_multiengine",
+          "explicit_set_keys": [
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 810,
+          "receiver": "options",
+          "scope": "test_case1",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE",
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1330,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1522,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1665,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1819,
+          "receiver": null,
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 11
+    },
+    "aviary/subsystems/geometry/flops_based/test/test_prep_geom.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 802,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.BWB.DETAILED_WING_PROVIDED",
+            "Aircraft.BWB.MAX_BAY_WIDTH",
+            "Aircraft.BWB.MAX_NUM_BAYS",
+            "Aircraft.BWB.NUM_BAYS",
+            "Aircraft.Design.TYPE",
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Fuselage.SIMPLE_LAYOUT",
+            "Aircraft.Propulsion.TOTAL_NUM_FUSELAGE_ENGINES",
+            "Aircraft.Wing.INPUT_STATION_DISTRIBUTION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1043,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.BWB.DETAILED_WING_PROVIDED",
+            "Aircraft.BWB.MAX_NUM_BAYS",
+            "Aircraft.BWB.NUM_BAYS",
+            "Aircraft.CrewPayload.Design.NUM_BUSINESS_CLASS",
+            "Aircraft.CrewPayload.Design.NUM_ECONOMY_CLASS",
+            "Aircraft.CrewPayload.Design.NUM_FIRST_CLASS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_BUSINESS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_FIRST",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_BUSINESS",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_FIRST",
+            "Aircraft.Design.TYPE",
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Fuselage.SIMPLE_LAYOUT",
+            "Aircraft.Propulsion.TOTAL_NUM_FUSELAGE_ENGINES",
+            "Aircraft.Wing.DETAILED_WING",
+            "Aircraft.Wing.INPUT_STATION_DISTRIBUTION"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 2
+    },
+    "aviary/subsystems/geometry/gasp_based/test/test_empennage.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 197,
+          "receiver": "options",
+          "scope": "test_large_sinle_aisle_1_calc_volcoefs",
+          "explicit_set_keys": [
+            "Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF",
+            "Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/subsystems/geometry/gasp_based/test/test_fuselage.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 28,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 61,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 130,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 165,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 206,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 244,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Fuselage.SEAT_WIDTH_ECONOMY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 283,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Fuselage.SEAT_WIDTH_ECONOMY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 532,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_FIRST_CLASS",
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_FIRST",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Settings.VERBOSITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 8
+    },
+    "aviary/subsystems/geometry/gasp_based/test/test_non_dimensional_conversion.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 17,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 55,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 91,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 127,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 164,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 211,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 256,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 7
+    },
+    "aviary/subsystems/geometry/gasp_based/test/test_size_group.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 18,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Electrical.HAS_HYBRID_SYSTEM",
+            "Aircraft.Engine.INLET_AREA_COEFFICIENT",
+            "Aircraft.Fuselage.NUM_AISLES"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 136,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Electrical.HAS_HYBRID_SYSTEM",
+            "Aircraft.Engine.INLET_AREA_COEFFICIENT",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 276,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF",
+            "Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF",
+            "Aircraft.Electrical.HAS_HYBRID_SYSTEM",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 412,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF",
+            "Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF",
+            "Aircraft.Electrical.HAS_HYBRID_SYSTEM",
+            "Aircraft.Engine.INLET_AREA_COEFFICIENT",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 545,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.CrewPayload.Design.NUM_FIRST_CLASS",
+            "Aircraft.CrewPayload.Design.NUM_PASSENGERS",
+            "Aircraft.CrewPayload.Design.NUM_SEATS_ABREAST_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_ECONOMY",
+            "Aircraft.CrewPayload.Design.SEAT_PITCH_FIRST",
+            "Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF",
+            "Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF",
+            "Aircraft.Design.TYPE",
+            "Aircraft.Electrical.HAS_HYBRID_SYSTEM",
+            "Aircraft.Fuselage.NUM_AISLES",
+            "Aircraft.Fuselage.SEAT_WIDTH_FIRST",
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 5
+    },
+    "aviary/subsystems/geometry/gasp_based/test/test_wing.py": {
+      "domain": "subsystems/geometry",
+      "calls": [
+        {
+          "line": 139,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 213,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 249,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 284,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 318,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 370,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 405,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 437,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 489,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 548,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 590,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 691,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 784,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 868,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 941,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Strut.DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION",
+            "Aircraft.Wing.HAS_STRUT"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1021,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Wing.CHOOSE_FOLD_LOCATION",
+            "Aircraft.Wing.FOLD_DIMENSIONAL_LOCATION_SPECIFIED",
+            "Aircraft.Wing.HAS_FOLD"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1100,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 1139,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Design.TYPE"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 18
+    },
+    "aviary/subsystems/mass/flops_based/test/test_wing_detailed.py": {
+      "domain": "subsystems/mass",
+      "calls": [
+        {
+          "line": 431,
+          "receiver": "options",
+          "scope": "test_intensity_factor",
+          "explicit_set_keys": [
+            "Aircraft.Engine.NUM_ENGINES",
+            "Aircraft.Engine.NUM_WING_ENGINES",
+            "Aircraft.Propulsion.TOTAL_NUM_WING_ENGINES",
+            "Aircraft.Wing.INPUT_STATION_DISTRIBUTION",
+            "Aircraft.Wing.LOAD_DISTRIBUTION_CONTROL",
+            "Aircraft.Wing.NUM_INTEGRATION_STATIONS"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/subsystems/propulsion/propeller/test/test_hamilton_standard.py": {
+      "domain": "subsystems/propulsion",
+      "calls": [
+        {
+          "line": 88,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.Propeller.NUM_BLADES"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/subsystems/propulsion/propeller/test/test_propeller_performance.py": {
+      "domain": "subsystems/propulsion",
+      "calls": [
+        {
+          "line": 191,
+          "receiver": "options",
+          "scope": "setUp",
+          "explicit_set_keys": [
+            "Aircraft.Engine.GENERATE_FLIGHT_IDLE",
+            "Aircraft.Engine.Propeller.COMPUTE_INSTALLATION_LOSS",
+            "Aircraft.Engine.Propeller.NUM_BLADES",
+            "Settings.VERBOSITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    },
+    "aviary/subsystems/propulsion/test/test_turboprop_model.py": {
+      "domain": "subsystems/propulsion",
+      "calls": [
+        {
+          "line": 151,
+          "receiver": "options",
+          "scope": "test_case_1",
+          "explicit_set_keys": [
+            "'speed_type'",
+            "Aircraft.Engine.DATA_FILE",
+            "Aircraft.Engine.FIXED_RPM",
+            "Aircraft.Engine.Propeller.COMPUTE_INSTALLATION_LOSS",
+            "Aircraft.Engine.Propeller.NUM_BLADES",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 228,
+          "receiver": "options",
+          "scope": "test_case_2",
+          "explicit_set_keys": [
+            "Aircraft.Engine.DATA_FILE",
+            "Aircraft.Engine.FIXED_RPM",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 293,
+          "receiver": "options",
+          "scope": "test_case_3",
+          "explicit_set_keys": [
+            "Aircraft.Engine.DATA_FILE",
+            "Aircraft.Engine.FIXED_RPM",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 334,
+          "receiver": "options",
+          "scope": "test_electroprop_fixed_RPM",
+          "explicit_set_keys": [
+            "Aircraft.Engine.FIXED_RPM",
+            "Aircraft.Engine.Motor.DATA_FILE",
+            "Aircraft.Engine.RPM_DESIGN",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 387,
+          "receiver": "options",
+          "scope": "test_electroprop_calc_RPM",
+          "explicit_set_keys": [
+            "Aircraft.Engine.Motor.DATA_FILE",
+            "Aircraft.Engine.RPM_DESIGN",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        },
+        {
+          "line": 441,
+          "receiver": "options",
+          "scope": "test_control_rpm_turboprop",
+          "explicit_set_keys": [
+            "Aircraft.Engine.DATA_FILE",
+            "Mission.SEA_LEVEL_DENSITY"
+          ],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 6
+    },
+    "aviary/utils/test/test_csv_data_file.py": {
+      "domain": "utils",
+      "calls": [
+        {
+          "line": 98,
+          "receiver": "aircraft_values",
+          "scope": "test_parse_input",
+          "explicit_set_keys": [],
+          "dynamic_set_calls": 0
+        }
+      ],
+      "call_count": 1
+    }
+  }
+}
