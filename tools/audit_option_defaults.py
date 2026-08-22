@@ -95,7 +95,7 @@ def analyze_file(rel: Path):
     path = ROOT / rel
     try:
         source = path.read_text(encoding='utf-8')
-        tree = ast.parse(source, filename=str(rel))
+        tree = ast.parse(source, filename=rel.as_posix())
     except (UnicodeDecodeError, SyntaxError):
         return []
 
@@ -133,7 +133,7 @@ def build_report():
         if not calls:
             continue
         domain = domain_for(rel)
-        file_records[str(rel)] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
+        file_records[rel.as_posix()] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
         domain_counts[domain] += len(calls)
         total_calls += len(calls)
         total_explicit_keys += sum(len(call['explicit_set_keys']) for call in calls)
