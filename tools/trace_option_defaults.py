@@ -165,7 +165,7 @@ def aggregate(records):
     for record in records:
         trace = record.trace
         site = trace['callsite']
-        key = f"{site['file']}:{site['line']}:{site['function']}"
+        key = f'{site["file"]}:{site["line"]}:{site["function"]}'
         group = grouped[key]
         group['instances'] += 1
         for field in ('get_val', 'get_item', 'contains', 'set_val', 'delete', 'bulk_access'):
