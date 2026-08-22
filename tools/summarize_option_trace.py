@@ -23,7 +23,7 @@ def static_callsites(static_report):
     result = {}
     for path, info in static_report.get('files', {}).items():
         for call in info.get('calls', []):
-            key = f"{path}:{call['line']}:{call['scope']}"
+            key = f'{path}:{call["line"]}:{call["scope"]}'
             result[key] = call
     return result
 
@@ -113,8 +113,7 @@ def summarize(trace, static_report):
         'migration_candidates': migration_candidates,
         'builder_heavy_or_opaque': builder_heavy,
         'most_common_runtime_reads': [
-            {'key': key, 'callsite_count': count}
-            for key, count in key_frequency.most_common(25)
+            {'key': key, 'callsite_count': count} for key, count in key_frequency.most_common(25)
         ],
         'callsites': callsites,
     }
@@ -136,9 +135,9 @@ def main():
 
     summary = report['summary']
     print(
-        f"Traced {summary['runtime_callsites']} callsites; "
-        f"{summary['migration_candidate_count']} are small/medium candidates and "
-        f"{summary['builder_heavy_count']} are builder-heavy or opaque."
+        f'Traced {summary["runtime_callsites"]} callsites; '
+        f'{summary["migration_candidate_count"]} are small/medium candidates and '
+        f'{summary["builder_heavy_count"]} are builder-heavy or opaque.'
     )
 
 
