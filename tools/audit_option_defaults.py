@@ -11,7 +11,7 @@ from __future__ import annotations
 import argparse
 import ast
 import json
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,7 +123,7 @@ def analyze_file(rel: Path):
 
 
 def build_report():
-    files = {}
+    file_records = {}
     domain_counts = Counter()
     total_calls = 0
     total_explicit_keys = 0
@@ -133,7 +133,7 @@ def build_report():
         if not calls:
             continue
         domain = domain_for(rel)
-        files[str(rel)] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
+        file_records[str(rel)] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
         domain_counts[domain] += len(calls)
         total_calls += len(calls)
         total_explicit_keys += sum(len(call['explicit_set_keys']) for call in calls)
@@ -143,11 +143,11 @@ def build_report():
         'purpose': 'Track and eliminate hidden get_option_defaults dependencies without regressions.',
         'summary': {
             'call_count': total_calls,
-            'file_count': len(files),
+            'file_count': len(file_records),
             'explicit_override_key_count': total_explicit_keys,
             'domain_counts': dict(sorted(domain_counts.items())),
         },
-        'files': dict(sorted(files.items())),
+        'files': dict(sorted(file_records.items())),
     }
 
 
@@ -165,7 +165,7 @@ def compare_to_baseline(current, baseline):
     if current['summary']['call_count'] > baseline['summary']['call_count']:
         failures.append(
             'repository total: '
-            f"{baseline['summary']['call_count']} -> {current['summary']['call_count']} calls"
+            f'{baseline["summary"]["call_count"]} -> {current["summary"]["call_count"]} calls'
         )
     return failures
 
@@ -184,8 +184,8 @@ def main():
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
         print(
-            f"Wrote {report['summary']['call_count']} calls in "
-            f"{report['summary']['file_count']} files to {manifest_path.relative_to(ROOT)}"
+            f'Wrote {report["summary"]["call_count"]} calls in '
+            f'{report["summary"]["file_count"]} files to {manifest_path.relative_to(ROOT)}'
         )
 
     if args.check:
@@ -199,8 +199,8 @@ def main():
                 print(f'  {failure}')
             raise SystemExit(1)
         print(
-            f"Option-default ratchet passed: {report['summary']['call_count']} calls "
-            f"across {report['summary']['file_count']} files"
+            f'Option-default ratchet passed: {report["summary"]["call_count"]} calls '
+            f'across {report["summary"]["file_count"]} files'
         )
 
     if not args.write_manifest and not args.check:
