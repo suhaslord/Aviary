@@ -165,7 +165,7 @@ def compare_to_baseline(current, baseline):
     if current['summary']['call_count'] > baseline['summary']['call_count']:
         failures.append(
             'repository total: '
-            f"{baseline['summary']['call_count']} -> {current['summary']['call_count']} calls"
+            f'{baseline["summary"]["call_count"]} -> {current["summary"]["call_count"]} calls'
         )
     return failures
 
@@ -184,8 +184,8 @@ def main():
         manifest_path.parent.mkdir(parents=True, exist_ok=True)
         manifest_path.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
         print(
-            f"Wrote {report['summary']['call_count']} calls in "
-            f"{report['summary']['file_count']} files to {manifest_path.relative_to(ROOT)}"
+            f'Wrote {report["summary"]["call_count"]} calls in '
+            f'{report["summary"]["file_count"]} files to {manifest_path.relative_to(ROOT)}'
         )
 
     if args.check:
@@ -199,8 +199,8 @@ def main():
                 print(f'  {failure}')
             raise SystemExit(1)
         print(
-            f"Option-default ratchet passed: {report['summary']['call_count']} calls "
-            f"across {report['summary']['file_count']} files"
+            f'Option-default ratchet passed: {report["summary"]["call_count"]} calls '
+            f'across {report["summary"]["file_count"]} files'
         )
 
     if not args.write_manifest and not args.check:
