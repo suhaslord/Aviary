@@ -151,9 +151,7 @@ class FlightODEDescenTestCase(unittest.TestCase):
         self.sys = self.prob.model = FlightODE(
             num_nodes=1,
             mach_target=0.8,
-            aviary_options=AviaryValues(
-                {Settings.VERBOSITY: (Verbosity.BRIEF, 'unitless')}
-            ),
+            aviary_options=AviaryValues({Settings.VERBOSITY: (Verbosity.BRIEF, 'unitless')}),
             subsystems=default_mission_subsystems,
         )
 

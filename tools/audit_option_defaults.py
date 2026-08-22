@@ -133,7 +133,7 @@ def build_report():
         if not calls:
             continue
         domain = domain_for(rel)
-        files[str(rel)] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
+        files[rel.as_posix()] = {'domain': domain, 'calls': calls, 'call_count': len(calls)}
         domain_counts[domain] += len(calls)
         total_calls += len(calls)
         total_explicit_keys += sum(len(call['explicit_set_keys']) for call in calls)
