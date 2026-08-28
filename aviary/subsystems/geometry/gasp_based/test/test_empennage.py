@@ -5,8 +5,8 @@ from openmdao.utils.assert_utils import assert_check_partials, assert_near_equal
 from openmdao.utils.testing_utils import use_tempdirs
 
 from aviary.subsystems.geometry.gasp_based.empennage import EmpennageSize, TailSize, TailVolCoef
+from aviary.utils.aviary_values import AviaryValues
 from aviary.variable_info.functions import setup_model_options
-from aviary.variable_info.options import get_option_defaults
 from aviary.variable_info.variables import Aircraft
 
 tol = 5e-4
@@ -35,10 +35,6 @@ class TestTailVolCoef(
         self.prob.model.set_input_defaults(Aircraft.Fuselage.AVG_DIAMETER, val=13.1, units='ft')
         self.prob.model.set_input_defaults(Aircraft.Wing.AREA, val=1370.3, units='ft**2')
         self.prob.model.set_input_defaults(Aircraft.Wing.AVERAGE_CHORD, val=12.615, units='ft')
-        self.prob.model.set_input_defaults(
-            Aircraft.HorizontalTail.VERTICAL_TAIL_MOUNT_LOCATION, val=0, units='unitless'
-        )
-        self.prob.model.set_input_defaults(Aircraft.Fuselage.AVG_DIAMETER, val=13.1, units='ft')
         self.prob.model.set_input_defaults(Aircraft.Wing.SPAN, 117.8054, units='ft')
         self.prob.setup(check=False, force_alloc_complex=True)
 
@@ -194,7 +190,7 @@ class TestEmpennageGroup(
         assert_check_partials(partial_data, **partial_tols)
 
     def test_large_sinle_aisle_1_calc_volcoefs(self):
-        options = get_option_defaults()
+        options = AviaryValues()
         options.set_val(Aircraft.Design.COMPUTE_HTAIL_VOLUME_COEFF, val=True, units='unitless')
         options.set_val(Aircraft.Design.COMPUTE_VTAIL_VOLUME_COEFF, val=True, units='unitless')
 
